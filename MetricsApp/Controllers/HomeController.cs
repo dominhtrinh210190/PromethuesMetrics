@@ -12,5 +12,17 @@ namespace MetricsApp.Controllers
         {
             return View();
         }
+
+        [Route("data1")]
+        public string GetData1()
+        {
+            return $"data 1";
+        }
+
+        [Route("data2")]
+        public string GetData2()
+        {
+            return $"data 2";
+        }
     }
 }

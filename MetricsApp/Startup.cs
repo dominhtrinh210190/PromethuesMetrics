@@ -48,7 +48,14 @@ namespace MetricsApp
             app.UseMetricServer();
 
             app.UseAuthorization();
-             
+              
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id:int?}");
+            });
+
             app.Map("/metrics", metricsApp =>
             {
                 // metricsApp.UseMiddleware<BasicAuthMiddleware>("Contoso Corporation");
@@ -56,13 +63,6 @@ namespace MetricsApp
                 var metricServer = new KestrelMetricServer(port: 9095);
                 metricServer.Start();
                 // metricsApp.UseMetricServer("");
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id:int?}");
             });
         }
     }
